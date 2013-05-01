@@ -548,18 +548,6 @@ public class EditRule extends Activity implements
 			finish();
 			return true;
 		}
-		case R.id.menu_help: {
-			Intent myIntent = new Intent(this, Help.class)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(myIntent);
-			return true;
-		}
-		case R.id.menu_settings: {
-			Intent myIntent = new Intent(this, Preferences.class)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(myIntent);
-			return true;
-		}
 		default: {
 			return super.onOptionsItemSelected(item);
 		}

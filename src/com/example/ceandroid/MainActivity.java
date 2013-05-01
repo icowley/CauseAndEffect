@@ -201,38 +201,6 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * Called when the user tries to access the Help Activity Allows access
-	 * unless the database and service aren't ready yet
-	 * 
-	 * @param v
-	 */
-	public void help(View v) {
-		if (app.getListType() != 0) {
-			Intent myIntent = new Intent(this, Help.class)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(myIntent);
-		} else {
-			loading();
-		}
-	}
-
-	/**
-	 * Called when the user tries to access the Preferences Activity Allows
-	 * access unless the database and service aren't ready yet
-	 * 
-	 * @param v
-	 */
-	public void settings(View v) {
-		if (app.getListType() != 0) {
-			Intent myIntent = new Intent(this, Preferences.class)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(myIntent);
-		} else {
-			loading();
-		}
-	}
-
-	/**
 	 * Called when the user tries to create a new rule (EditRule Activity)
 	 * Allows access unless the database and service aren't ready yet
 	 * 
