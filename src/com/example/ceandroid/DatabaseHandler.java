@@ -47,7 +47,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	 * The Location of the Database on the Device
 	 */
 	@SuppressLint("SdCardPath")
-	private static final String DB_FILEPATH = "/data/data/com.example.ceandroid/databases/database.db";
+	private static final String DB_FILEPATH = "/data/data/com.example.ceandroid/databases/CEdb.db";
 
 	/**
 	 * Rules table name
@@ -228,7 +228,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			getWritableDatabase().close();
 			return true;
 		}
-
 		return false;
 	}
 
