@@ -50,23 +50,14 @@
        	</service>
          
          <activity
-            android:name=".MainActivity"
+            android:name=".MyRules"
             android:label="@string/title_activity_main"
-            android:theme="@android:style/Theme.NoTitleBar"
             android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".Help"
-            android:label="@string/help" >
-        </activity>
-        <activity
-            android:name=".Preferences"
-            android:label="@string/title_activity_preferences" >
         </activity>
         <activity 
             android:name=".ShareList"
@@ -82,18 +73,7 @@
             android:name=".ShareNFC"
             android:label="@string/title_activity_sharenfc" >
         </activity>
-        <activity
-            android:name=".General"
-            android:label="@string/title_activity_general" >
-        </activity>
-        <activity
-            android:name=".About"
-            android:label="@string/title_activity_about" >
-        </activity>
-        <activity
-            android:name=".Security"
-            android:label="@string/title_activity_security" >
-        </activity>
+
         <activity
             android:name=".CauseView"
             android:label="@string/cause" >
@@ -109,10 +89,6 @@
         <activity
             android:name=".CategoryList"
             android:label="@string/category" >
-        </activity>
-        <activity
-            android:name=".MyRules"
-            android:label="@string/my_rules" >
         </activity>
         <activity
             android:name=".EditRule"

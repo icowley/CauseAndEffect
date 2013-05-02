@@ -377,7 +377,7 @@ public class ShareList extends ListActivity {
 		case android.R.id.home:
 			// This is called when the Home (Up) button is pressed
 			// in the Action Bar.
-			Intent parentActivityIntent = new Intent(this, MainActivity.class);
+			Intent parentActivityIntent = new Intent(this, MyRules.class);
 			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(parentActivityIntent);

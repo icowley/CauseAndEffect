@@ -93,13 +93,6 @@ public class MyRules extends FragmentActivity implements
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_activated_1, Elements);
 
-		// Set up the action bar
-		final ActionBar actionbar = getActionBar();
-		if (actionbar != null) {
-			// Turn on "up" navigation
-			actionbar.setDisplayHomeAsUpEnabled(true);
-		}
-
 		// set the adapter of each view with the same data
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
@@ -205,16 +198,6 @@ public class MyRules extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
-		case android.R.id.home: {
-			// This is called when the Home (Up) button is pressed
-			// in the Action Bar.
-			Intent parentActivityIntent = new Intent(this, MainActivity.class);
-			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(parentActivityIntent);
-			finish();
-			return true;
-		}
 		case R.id.menu_new_rule: {
 			// New Rule
 			CEapp app = (CEapp) this.getApplication();
