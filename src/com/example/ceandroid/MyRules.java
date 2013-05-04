@@ -3,7 +3,6 @@ package com.example.ceandroid;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ActionBar;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,11 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
 /**
  * MyRules Class displays the list of Rules
@@ -145,6 +144,13 @@ public class MyRules extends FragmentActivity implements
 						Toast.LENGTH_LONG).show();
 				app.currentRule = null;
 				db.close();
+			} else {
+				makeList();
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+						android.R.layout.simple_list_item_activated_1, Elements);
+				// set the adapter of each view with the same data
+				listView.setAdapter(adapter);
+				listView.setAdapter(adapter);
 			}
 		}
 	}
