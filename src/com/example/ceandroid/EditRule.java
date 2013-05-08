@@ -4,25 +4,21 @@ import java.util.ArrayList;
 
 import CEapi.rCause;
 import CEapi.rEffect;
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.app.DialogFragment;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * The EditRule class is the main Activity for rule creation This Activity is
@@ -162,147 +158,6 @@ public class EditRule extends Activity implements
 				android.R.id.text1, eList);
 		cListView.setAdapter(cA);
 		eListView.setAdapter(eA);
-
-		// List Click Adapters
-		cListView.setOnItemClickListener(new OnItemClickListener() {
-			/**
-			 * Cause List Item Clicked Calls the CauseView page for this Cause
-			 * 
-			 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
-			 *      android.view.View, int, long)
-			 */
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				EditRuleNode comp = (EditRuleNode) arg0.getAdapter().getItem(
-						arg2);
-				size = app.currentRule.getRCauses().size();
-				// int size = arg0.getAdapter().getCount();
-				app.editType = true;
-				// if(size == (arg2+1))
-				if (comp.isPlus()) {
-					app.edit = false;
-					Intent myIntent = new Intent(getApplicationContext(),
-							CauseView.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(myIntent);
-				} else if (comp.isBool()) {
-					DatabaseHandler db = new DatabaseHandler(
-							getApplicationContext());
-					if (comp.value.equals("OR")) {
-						comp.value = "AND";
-						bools.get(arg2 / 2).value = "AND";
-						app.currentRule.updateTreeData(bools);
-						cA.notifyDataSetChanged();
-					} else {
-						comp.value = "OR";
-						bools.get(arg2 / 2).value = "OR";
-						app.currentRule.updateTreeData(bools);
-						cA.notifyDataSetChanged();
-					}
-					db.updateRule(app.currentRule);
-					db.close();
-				} else {
-					delPos = arg2 / 2;
-					app.edit = true;
-					app.editID = convertTypeToCEnum(app.currentRule
-							.getRCauses().get(arg2 / 2).getType(),
-							app.currentRule.getRCauses().get(arg2 / 2)
-									.getCauseID());
-					app.editedNumber = app.currentRule.getRCauses()
-							.get(arg2 / 2).getID();
-					Intent myIntent = new Intent(getApplicationContext(),
-							CauseView.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(myIntent);
-				}
-			}
-		});
-		cListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-			/**
-			 * Called when a Cause has a long tap Delete dialog is called where
-			 * appropriate
-			 * 
-			 * @see android.widget.AdapterView.OnItemLongClickListener#onItemLongClick(android.widget.AdapterView,
-			 *      android.view.View, int, long)
-			 */
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				// int size = arg0.getAdapter().getCount();
-				EditRuleNode comp = (EditRuleNode) arg0.getAdapter().getItem(
-						arg2);
-				// if(size == (arg2+1))
-				if (comp.isCause()) {
-					app.editType = true;
-					delPos = arg2 / 2;
-					app.editedNumber = app.currentRule.getRCauses()
-							.get(arg2 / 2).getID();
-					DialogFragment newFragment = new DeleteDialogFragment();
-					newFragment.show(getFragmentManager(), "delete");
-				}
-				return true;
-			}
-		});
-		eListView.setOnItemClickListener(new OnItemClickListener() {
-			/**
-			 * Effect List Item Clicked Calls the EffectView page for this
-			 * Effect
-			 * 
-			 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView,
-			 *      android.view.View, int, long)
-			 */
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				int size = arg0.getAdapter().getCount();
-				app.editType = false;
-				if (size == (arg2 + 1)) {
-					app.edit = false;
-					Intent myIntent = new Intent(getApplicationContext(),
-							EffectView.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(myIntent);
-				} else {
-					app.edit = true;
-					app.editID = convertTypeToEEnum(app.currentRule
-							.getREffects().get(arg2).getType());
-					app.editedNumber = app.currentRule.getREffects().get(arg2)
-							.getID();
-					if (app.currentRule.getREffects().get(arg2).getType()
-							.equals("vibrate")) {
-						Toast.makeText(getApplicationContext(),
-								"Cannot edit vibrate effects",
-								Toast.LENGTH_LONG).show();
-					} else {
-						Intent myIntent = new Intent(getApplicationContext(),
-								EffectView.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(myIntent);
-					}
-				}
-			}
-		});
-		eListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-			/**
-			 * Called when a Effect has a long tap Delete dialog is called where
-			 * appropriate
-			 * 
-			 * @see android.widget.AdapterView.OnItemLongClickListener#onItemLongClick(android.widget.AdapterView,
-			 *      android.view.View, int, long)
-			 */
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-					int arg2, long arg3) {
-				int size = arg0.getAdapter().getCount();
-				if (size == (arg2 + 1)) {
-					// do nothing, '+' was selected
-				} else {
-					app.editType = false;
-					app.editedNumber = app.currentRule.getREffects().get(arg2)
-							.getID();
-					DialogFragment newFragment = new DeleteDialogFragment();
-					newFragment.show(getFragmentManager(), "delete");
-				}
-				return true;
-			}
-		});
 
 		// Load the kind of list
 		app = (CEapp) this.getApplication();
@@ -470,52 +325,6 @@ public class EditRule extends Activity implements
 		// Add Adapters
 		cList.add(new EditRuleNode("+", false, false));
 		eList.add("+");
-	}
-
-	/**
-	 * Enum conversions for rEffects in the list
-	 * 
-	 * @param type
-	 * @return int The type of rEffect
-	 */
-	public int convertTypeToEEnum(String type) {
-		if (type.equals("notification"))
-			return 0;
-		if (type.equals("sound"))
-			return 1;
-		if (type.equals("ringer"))
-			return 2;
-		if (type.equals("toast"))
-			return 3;
-		if (type.equals("vibrate"))
-			return 4;
-		return -1;
-	}
-
-	/**
-	 * Enum conversions for rCauses in the list
-	 * 
-	 * @param type
-	 * @return int The type of rCause
-	 */
-	public int convertTypeToCEnum(String type, int cid) {
-		if (type.equals("location")) {
-			if (cid == 6)
-				return 0;
-			else
-				return 1;
-		}
-		if (type.equals("phoneCall"))
-			return 2;
-		if (type.equals("textMessage"))
-			return 3;
-		if (type.equals("time"))
-			return 4;
-		if (type.equals("ssid"))
-			return 5;
-		if (type.equals("wifiStatus"))
-			return 6;
-		return -1;
 	}
 
 	/**

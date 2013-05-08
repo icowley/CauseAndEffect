@@ -4,9 +4,9 @@
     style="@style/AppTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:focusable="true" 
-    android:focusableInTouchMode="true">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
 
     <EditText
         android:id="@+id/textView1"
@@ -16,80 +16,82 @@
         android:gravity="center"
         android:hint="@string/default_name"
         android:inputType="text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:selectAllOnFocus="true" />
-    
-    
-    
+        android:selectAllOnFocus="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:text="@string/cause"
         android:gravity="center"
+        android:text="@string/cause"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-    
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:text="@string/effect"
         android:gravity="center"
+        android:text="@string/effect"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ListView
         android:id="@+id/causes"
         android:layout_width="wrap_content"
         android:layout_height="155dp"
-        android:divider="#33B5E5"
-    	android:dividerHeight="1dp"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/imageView2"
-        android:layout_alignParentLeft="true" />
-    
+        android:divider="#33B5E5"
+        android:dividerHeight="1dp" />
+
     <ListView
         android:id="@+id/effects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="#33B5E5"
-    	android:dividerHeight="1dp"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/imageView3"
-        android:layout_alignParentRight="true"/>
+        android:divider="#33B5E5"
+        android:dividerHeight="1dp" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/dividerh" android:contentDescription="@string/divider"/>
-    
+        android:layout_below="@+id/textView2"
+        android:contentDescription="@string/divider"
+        android:src="@drawable/dividerh" />
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/causes"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/dividerh" android:contentDescription="@string/divider"/>
-    
+        android:layout_below="@+id/causes"
+        android:contentDescription="@string/divider"
+        android:src="@drawable/dividerh" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/dividerh" android:contentDescription="@string/divider"/>
-    
+        android:layout_below="@+id/textView3"
+        android:contentDescription="@string/divider"
+        android:src="@drawable/dividerh" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/dividerh" android:contentDescription="@string/divider"/>
+        android:layout_below="@+id/textView4"
+        android:contentDescription="@string/divider"
+        android:src="@drawable/dividerh" />
 
     <Switch
         android:id="@+id/switch1"
