@@ -2,8 +2,9 @@ package com.example.ceandroid;
 
 import java.util.ArrayList;
 
+import CEapi.rCause;
 import android.app.DialogFragment;
-import android.app.ListFragment;
+import android.support.v4.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,11 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-public class CauseFragment extends ListFragment {
+public class CauseFragment extends ListFragment  implements
+DeleteDialogFragment.DeleteDialogListener {
 	/**
 	 * CEapp contains the globally accessible variables
 	 */
-	private CEapp app = (CEapp) getActivity().getApplication();
+	private CEapp app;
 
 	/**
 	 * The list of rCauses
@@ -46,6 +48,7 @@ public class CauseFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = (CEapp) getActivity().getApplication();
 		// Create Lists
 		cA = new ArrayAdapter<EditRuleNode>(getActivity(),
 				android.R.layout.simple_list_item_activated_1,
@@ -123,11 +126,39 @@ public class CauseFragment extends ListFragment {
 					app.editedNumber = app.currentRule.getRCauses()
 							.get(arg2 / 2).getID();
 					DialogFragment newFragment = new DeleteDialogFragment();
-					newFragment.show(getFragmentManager(), "delete");
+					newFragment.show(getSupportFragmentManager(), "delete");
 				}
 				return true;
 			}
 		});
+
+		// Add the causes to the list.
+		for (int i = 0; i < app.currentRule.getRCauses().size(); i++) {
+			rCause r = app.currentRule.getRCauses().get(i);
+
+			if (!r.getType().equals("location")) {
+				cList.add(new EditRuleNode(r.getName() + "\n"
+						+ r.getParameters(), true, false));
+			} else {
+				String param = r.getParameters();
+				String finalParam = "";
+				char cur = ' ';
+				int start = 0;
+				while (cur != '\n') {
+					cur = param.charAt(start);
+					finalParam += cur;
+					start++;
+				}
+				cList.add(new EditRuleNode(r.getName() + "\n" + finalParam,
+						true, false));
+			}
+
+			if (i < bools.size() && !bools.isEmpty()) {
+				cList.add(bools.get(i));
+			}
+		}
+		
+		cList.add(new EditRuleNode("+", false, false));
 	}
 
 	/**
@@ -154,6 +185,44 @@ public class CauseFragment extends ListFragment {
 		if (type.equals("wifiStatus"))
 			return 6;
 		return -1;
+	}
+	
+	/**
+	 * This is called when a delete of a rCause or rEffect is confirmed
+	 * 
+	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogPositiveClick(android.app.DialogFragment)
+	 */
+	public void onDialogPositiveClick(DialogFragment dialog) {
+		// clicked to delete the cause or effect
+		DatabaseHandler db = new DatabaseHandler(getActivity());
+		if (app.editType) // cause
+		{
+			db.deleteRCause(db.getRCauseByID(app.editedNumber));
+			if (!bools.isEmpty() && bools.size() == delPos) {
+				bools.remove(bools.size() - 1);
+			} else if (!bools.isEmpty()) {
+				bools.remove(delPos);
+			}
+		} else // effect
+		{
+			db.deleteREffect(db.getREffectByID(app.editedNumber));
+		}
+		app.currentRule.setRCauses(db.getAllRCauses(app.currentRule.getID()));
+		app.currentRule.setREffects(db.getAllREffects(app.currentRule.getID()));
+		app.currentRule.updateTreeData(bools);
+		bools = app.currentRule.getBoolSequence();
+		db.close();
+		getActivity().finish();
+		startActivity(getActivity().getIntent());
+	}
+
+	/**
+	 * This is called when the delete of a rCause or rEffect is cancelled
+	 * 
+	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogNegativeClick(android.app.DialogFragment)
+	 */
+	public void onDialogNegativeClick(DialogFragment dialog) {
+		// clicked cancel, do not do anything
 	}
 
 }

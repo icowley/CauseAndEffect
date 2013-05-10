@@ -2,6 +2,7 @@ package com.example.ceandroid;
 
 import java.util.ArrayList;
 
+import CEapi.rEffect;
 import android.app.DialogFragment;
 import android.app.ListFragment;
 import android.content.Intent;
@@ -108,6 +109,23 @@ public class EffectFragment extends ListFragment {
 				return true;
 			}
 		});
+		
+		// Add the effects to the list.
+		for (int i = 0; i < app.currentRule.getREffects().size(); i++) {
+			rEffect r = app.currentRule.getREffects().get(i);
+			String finalParam = r.getParameters();
+			if (r.getType().equals("sound")) {
+				finalParam = finalParam.split("\\n")[1];
+			}
+
+			if (r.getType().equals("toast")) {
+				eList.add("Popup Text" + "\n" + finalParam);
+			} else {
+				eList.add(r.getName() + "\n" + finalParam);
+			}
+		}
+		eList.add("+");
+
 	}
 
 	/**

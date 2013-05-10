@@ -2,21 +2,18 @@ package com.example.ceandroid;
 
 import java.util.ArrayList;
 
-import CEapi.rCause;
-import CEapi.rEffect;
-import android.app.Activity;
-import android.app.DialogFragment;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 
@@ -29,52 +26,22 @@ import android.widget.Switch;
  * 
  * @author CEandroid SMU
  */
-public class EditRule extends Activity implements
-		DeleteDialogFragment.DeleteDialogListener {
+public class EditRule extends FragmentActivity {
 	/**
 	 * CEapp contains the globally accessible variables
 	 */
 	private CEapp app = (CEapp) this.getApplication();
 	/**
-	 * The type of rCause or rEffect used for Enums
-	 */
-	int type = 0;
-	/**
 	 * Generic size variable
 	 */
 	static int size = 0;
 	/**
-	 * The position of the rCause or rEffect that is to be deleted
-	 */
-	static int delPos = 0;
-	/**
-	 * The list of rCauses
-	 */
-	ArrayList<EditRuleNode> cList = new ArrayList<EditRuleNode>();
-	/**
 	 * The list of ANDs and ORs for rCauses
 	 */
 	ArrayList<EditRuleNode> bools = new ArrayList<EditRuleNode>();
-	/**
-	 * The list of rEffects
-	 */
-	ArrayList<String> eList = new ArrayList<String>();
-	/**
-	 * The current rCause being updated
-	 */
-	ArrayAdapter<EditRuleNode> cA;
-	/**
-	 * The current rEffect being updated
-	 */
-	ArrayAdapter<String> eA;
-	/**
-	 * The ListView containing all of the rCauses
-	 */
-	ListView cListView;
-	/**
-	 * The ListView containing all of the rEffects
-	 */
-	ListView eListView;
+
+	private ViewPager mViewPager;
+	private TabsAdapter mTabsAdapter;
 	/**
 	 * TextWatcher updates the Rules named as it is changed
 	 */
@@ -138,6 +105,18 @@ public class EditRule extends Activity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_rule);
+		mViewPager = (ViewPager) findViewById(R.id.pager);
+		
+		final ActionBar bar = getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        bar.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
+
+        mTabsAdapter = new TabsAdapter(this, mViewPager);
+        mTabsAdapter.addTab(bar.newTab().setText("Cause"),
+                CauseFragment.class, null);
+        mTabsAdapter.addTab(bar.newTab().setText("Effect"),
+                EffectFragment.class, null);
+		
 
 		// Turn on "up" navigation
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -146,18 +125,6 @@ public class EditRule extends Activity implements
 		RelativeLayout myLayout = (RelativeLayout) this
 				.findViewById(R.id.relativeEditRule);
 		myLayout.requestFocus();
-
-		// Create Lists
-		cListView = (ListView) findViewById(R.id.causes);
-		eListView = (ListView) findViewById(R.id.effects);
-		cA = new ArrayAdapter<EditRuleNode>(this,
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, cList);
-		eA = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1, eList);
-		cListView.setAdapter(cA);
-		eListView.setAdapter(eA);
 
 		// Load the kind of list
 		app = (CEapp) this.getApplication();
@@ -282,49 +249,6 @@ public class EditRule extends Activity implements
 		}
 		db.close();
 
-		// add everything to lists
-		for (int i = 0; i < app.currentRule.getRCauses().size(); i++) {
-			rCause r = app.currentRule.getRCauses().get(i);
-
-			if (!r.getType().equals("location")) {
-				cList.add(new EditRuleNode(r.getName() + "\n"
-						+ r.getParameters(), true, false));
-			} else {
-				String param = r.getParameters();
-				String finalParam = "";
-				char cur = ' ';
-				int start = 0;
-				while (cur != '\n') {
-					cur = param.charAt(start);
-					finalParam += cur;
-					start++;
-				}
-				cList.add(new EditRuleNode(r.getName() + "\n" + finalParam,
-						true, false));
-			}
-
-			if (i < bools.size() && !bools.isEmpty()) {
-				cList.add(bools.get(i));
-			}
-		}
-
-		for (int i = 0; i < app.currentRule.getREffects().size(); i++) {
-			rEffect r = app.currentRule.getREffects().get(i);
-			String finalParam = r.getParameters();
-			if (r.getType().equals("sound")) {
-				finalParam = finalParam.split("\\n")[1];
-			}
-
-			if (r.getType().equals("toast")) {
-				eList.add("Popup Text" + "\n" + finalParam);
-			} else {
-				eList.add(r.getName() + "\n" + finalParam);
-			}
-		}
-
-		// Add Adapters
-		cList.add(new EditRuleNode("+", false, false));
-		eList.add("+");
 	}
 
 	/**
@@ -376,44 +300,6 @@ public class EditRule extends Activity implements
 		DatabaseHandler db = new DatabaseHandler(this);
 		db.updateActive(app.currentRule.getID(), on);
 		db.close();
-	}
-
-	/**
-	 * This is called when a delete of a rCause or rEffect is confirmed
-	 * 
-	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogPositiveClick(android.app.DialogFragment)
-	 */
-	public void onDialogPositiveClick(DialogFragment dialog) {
-		// clicked to delete the cause or effect
-		DatabaseHandler db = new DatabaseHandler(this);
-		if (app.editType) // cause
-		{
-			db.deleteRCause(db.getRCauseByID(app.editedNumber));
-			if (!bools.isEmpty() && bools.size() == delPos) {
-				bools.remove(bools.size() - 1);
-			} else if (!bools.isEmpty()) {
-				bools.remove(delPos);
-			}
-		} else // effect
-		{
-			db.deleteREffect(db.getREffectByID(app.editedNumber));
-		}
-		app.currentRule.setRCauses(db.getAllRCauses(app.currentRule.getID()));
-		app.currentRule.setREffects(db.getAllREffects(app.currentRule.getID()));
-		app.currentRule.updateTreeData(bools);
-		bools = app.currentRule.getBoolSequence();
-		db.close();
-		finish();
-		startActivity(getIntent());
-	}
-
-	/**
-	 * This is called when the delete of a rCause or rEffect is cancelled
-	 * 
-	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogNegativeClick(android.app.DialogFragment)
-	 */
-	public void onDialogNegativeClick(DialogFragment dialog) {
-		// clicked cancel, do not do anything
 	}
 
 	/**
