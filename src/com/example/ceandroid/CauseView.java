@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.example.ceandroid.Causes.MapPicker;
-
 import CEapi.Cause;
 import CEapi.rCause;
 import android.annotation.SuppressLint;
@@ -29,7 +27,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -37,18 +34,15 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.ceandroid.Causes.MapPicker;
+
 /**
  * CauseView Class displays the list of Causes
  * 
  * @author CEandroid SMU
  */
 public class CauseView extends FragmentActivity {
-	/**
-	 * Elements array holds and empty array that is later used for Cause
-	 * information
-	 */
-	static String[] Elements = new String[] { " ", " ", " ", " ", " ", " ",
-			" ", " ", " " };
+
 	/**
 	 * List View used to list out the Causes
 	 */
@@ -108,8 +102,7 @@ public class CauseView extends FragmentActivity {
 		// Load the kind of list
 		app = (CEapp) getApplication();
 		makeList();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_activated_1, Elements);
+		CauseAdapter adapter = new CauseAdapter(this, causes);
 
 		// set the adapter of each view with the same data
 		listView.setAdapter(adapter);
@@ -144,13 +137,7 @@ public class CauseView extends FragmentActivity {
 	 * makeList() is what is used by the onCreate to create the list of Causes
 	 */
 	public void makeList() {
-		// DatabaseHandler db = new DatabaseHandler(this.this);
 		causes = db.getAllCauses();
-		// db.close();
-		Elements = new String[causes.size()];
-		for (int i = 0; i < causes.size(); i++) {
-			Elements[i] = causes.get(i).getName();
-		}
 	}
 
 	/**

@@ -3,6 +3,11 @@ package com.example.ceandroid;
 import java.util.ArrayList;
 import java.util.List;
 
+import CEapi.Cause;
+import CEapi.Effect;
+import CEapi.rCause;
+import CEapi.rEffect;
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -67,6 +72,25 @@ public class MyRules extends FragmentActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Load the kind of list
+		app = (CEapp) getApplication();
+		app.edit = false;
+		
+		if (app.getListType() == 0) {
+			new Thread(new Runnable() {
+				/**
+				 * The database is created in a separate thread This keeps the
+				 * application responsive
+				 * 
+				 * @see java.lang.Runnable#run()
+				 */
+				public void run() {
+					testDatabase();
+				}
+			}).start();
+		}
+		
 		setContentView(R.layout.item_list);
 		@SuppressWarnings("unused")
 		Resources res = getResources();
@@ -74,9 +98,7 @@ public class MyRules extends FragmentActivity implements
 		listView.setTextFilterEnabled(true);
 		db = new DatabaseHandler(this);
 
-		// Load the kind of list
-		app = (CEapp) getApplication();
-		app.edit = false;
+
 
 		if (app.currentRule != null) {
 			if (app.currentRule.getRCauses().isEmpty()
@@ -268,4 +290,146 @@ public class MyRules extends FragmentActivity implements
 	public void onDialogNegativeClick(DialogFragment dialog) {
 		// clicked cancel, do not do anything
 	}
+	
+	// Generates test data for the database
+		/**
+		 * Used to create the database Creates Causes, Effects, and default Rules
+		 * Once this function is completed, the service is started, and user actions
+		 * are allowed
+		 */
+		@SuppressLint("SdCardPath")
+		public void testDatabase() {
+			DatabaseHandler db = new DatabaseHandler(this);
+
+			try {
+				db.importDatabase("/data/data/com.example.ceandroid/databases/CEdb.db");
+			} catch (Exception e) {
+				db.onUpgrade(db.getWritableDatabase(), 1, 1);
+				db.addCause(new Cause("time", "Time", "time reached", "time"));
+				db.addCause(new Cause("phoneCall", "Phone Call",
+						"incoming phone call", "phone"));
+				db.addCause(new Cause("textMessage", "Text Message",
+						"new text message", "message"));
+				db.addCause(new Cause("ssid", "Wifi SSID", "ssid match", "wifi"));
+				db.addCause(new Cause("wifiStatus", "Wifi Status", "wifi status",
+						"wifi"));
+				db.addCause(new Cause("location", "Arriving at a Location",
+						"Triggers when you arrive at a location", "Location"));
+				db.addCause(new Cause("location", "Departing a Location",
+						"Triggers when you depart a location", "Location"));
+				db.addEffect(new Effect("toast", "Toast",
+						"Displays a toast message", "display"));
+				db.addEffect(new Effect("vibrate", "Vibrate",
+						"Activates the phone's vibration", "system"));
+				db.addEffect(new Effect("notification", "Notification",
+						"Adds a notification", "display"));
+				db.addEffect(new Effect("sound", "Play Sound",
+						"Activates the phone's vibration", "media"));
+				db.addEffect(new Effect("ringer", "Ring Mode",
+						"Silent, Vibrate, and Normal ring modes", "system"));
+
+				ArrayList<rCause> ruleCauses = new ArrayList<rCause>();
+				ruleCauses.add(new rCause(1, 1, "12:30", "time"));
+				ArrayList<rEffect> ruleEffects = new ArrayList<rEffect>();
+				ruleEffects.add(new rEffect(1, 3, "Wake up!'Go to school.'",
+						"notification"));
+				db.addRule(new Rule("1$", "Alarm", ruleCauses, ruleEffects));
+
+				ruleCauses.clear();
+				ruleEffects.clear();
+				ruleCauses.add(new rCause(2, 1, "12:30", "time"));
+				ruleCauses.add(new rCause(2, 2, "Nathan R Huntoon", "phone call"));
+				ruleEffects.add(new rEffect(2, 2, "Tone Length:Long", "vibrate"));
+				ruleEffects.add(new rEffect(2, 3,
+						"Call from Nathan'Hangup Quick!'", "notification"));
+				db.addRule(new Rule("2,3,+$", "Call me maybe?", ruleCauses,
+						ruleEffects));
+
+				ruleCauses.clear();
+				ruleEffects.clear();
+				ruleCauses.add(new rCause(3, 1, "12:30", "time"));
+				ruleCauses.add(new rCause(3, 2, "Matt Rispoli", "phone call"));
+				ruleEffects.add(new rEffect(3, 2, "Tone Length:Long", "vibrate"));
+				ruleEffects
+						.add(new rEffect(3, 3,
+								"Call from Matt!'Probably about Physics.'",
+								"notification"));
+				db.addRule(new Rule("4,5,+$", "Called me.", ruleCauses, ruleEffects));
+
+				ruleCauses.clear();
+				ruleEffects.clear();
+				ruleCauses.add(new rCause(4, 4, "PerunaNet", "ssid"));
+				ruleCauses.add(new rCause(4, 1, "12:00", "time"));
+				ruleEffects.add(new rEffect(4, 3, "I am connected to PerunaNet!",
+						"notification"));
+				db.addRule(new Rule("6,7,+$", "SSID test", ruleCauses, ruleEffects));
+			}
+			if (db.getAllCauses().size() < 1)
+			{
+				db.onUpgrade(db.getWritableDatabase(), 1, 1);
+				db.addCause(new Cause("time", "Time", "time reached", "time"));
+				db.addCause(new Cause("phoneCall", "Phone Call",
+						"incoming phone call", "phone"));
+				db.addCause(new Cause("textMessage", "Text Message",
+						"new text message", "message"));
+				db.addCause(new Cause("ssid", "SSID", "ssid match", "wifi"));
+				db.addCause(new Cause("wifiStatus", "Status", "wifi status",
+						"wifi"));
+				db.addCause(new Cause("location", "Arriving",
+						"Triggers when you arrive at a location", "Location"));
+				db.addCause(new Cause("location", "Departing",
+						"Triggers when you depart a location", "Location"));
+				db.addEffect(new Effect("toast", "Toast",
+						"Displays a toast message", "display"));
+				db.addEffect(new Effect("vibrate", "Vibrate",
+						"Activates the phone's vibration", "system"));
+				db.addEffect(new Effect("notification", "Notification",
+						"Adds a notification", "display"));
+				db.addEffect(new Effect("sound", "Play Sound",
+						"Activates the phone's vibration", "media"));
+				db.addEffect(new Effect("ringer", "Ring Mode",
+						"Silent, Vibrate, and Normal ring modes", "system"));
+
+				ArrayList<rCause> ruleCauses = new ArrayList<rCause>();
+				ruleCauses.add(new rCause(1, 1, "12:30", "time"));
+				ArrayList<rEffect> ruleEffects = new ArrayList<rEffect>();
+				ruleEffects.add(new rEffect(1, 3, "Wake up!'Go to school.'",
+						"notification"));
+				db.addRule(new Rule("1$", "Alarm", ruleCauses, ruleEffects));
+
+				ruleCauses.clear();
+				ruleEffects.clear();
+				ruleCauses.add(new rCause(2, 1, "12:30", "time"));
+				ruleCauses.add(new rCause(2, 2, "Nathan R Huntoon", "phone call"));
+				ruleEffects.add(new rEffect(2, 2, "Tone Length:Long", "vibrate"));
+				ruleEffects.add(new rEffect(2, 3,
+						"Call from Nathan'Hangup Quick!'", "notification"));
+				db.addRule(new Rule("2,3,+$", "Call me maybe?", ruleCauses,
+						ruleEffects));
+
+				ruleCauses.clear();
+				ruleEffects.clear();
+				ruleCauses.add(new rCause(3, 1, "12:30", "time"));
+				ruleCauses.add(new rCause(3, 2, "Matt Rispoli", "phone call"));
+				ruleEffects.add(new rEffect(3, 2, "Tone Length:Long", "vibrate"));
+				ruleEffects
+						.add(new rEffect(3, 3,
+								"Call from Matt!'Probably about Physics.'",
+								"notification"));
+				db.addRule(new Rule("4,5,+$", "Called me.", ruleCauses, ruleEffects));
+
+				ruleCauses.clear();
+				ruleEffects.clear();
+				ruleCauses.add(new rCause(4, 4, "PerunaNet", "ssid"));
+				ruleCauses.add(new rCause(4, 1, "12:00", "time"));
+				ruleEffects.add(new rEffect(4, 3, "I am connected to PerunaNet!",
+						"notification"));
+				db.addRule(new Rule("6,7,+$", "SSID test", ruleCauses, ruleEffects));	
+			}
+			app.setListType(-1);
+			db.close();
+
+			Intent service = new Intent(this, CEservice.class);
+			this.startService(service);
+		}
 }

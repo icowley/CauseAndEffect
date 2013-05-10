@@ -45,7 +45,7 @@
         android:id="@+id/causes"
         android:layout_width="wrap_content"
         android:layout_height="155dp"
-        android:divider="#33B5E5"
+        android:divider="#C3BFBE"
     	android:dividerHeight="1dp"
         android:layout_below="@+id/imageView2"
         android:layout_alignParentLeft="true" />
@@ -54,7 +54,7 @@
         android:id="@+id/effects"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="#33B5E5"
+        android:divider="#C3BFBE"
     	android:dividerHeight="1dp"
         android:layout_below="@+id/imageView3"
         android:layout_alignParentRight="true"/>
