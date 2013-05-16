@@ -200,7 +200,7 @@ public class MyRules extends FragmentActivity implements
 		app.currentRule.setREffects(db.getAllREffects(app.currentRule.getID()));
 
 		// Calls the Edit Text
-		Intent myIntent = new Intent(getApplicationContext(), EditRule.class)
+		Intent myIntent = new Intent(getApplicationContext(), EditRulePager.class)
 				.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(myIntent);
 		db.close();
@@ -235,7 +235,7 @@ public class MyRules extends FragmentActivity implements
 			 * app.currentRule.setID(db.getRulesCount()+1); db.close();
 			 */
 
-			Intent myIntent = new Intent(this, EditRule.class)
+			Intent myIntent = new Intent(this, EditRulePager.class)
 					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 			return true;

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">C&amp;E</string>
@@ -8,21 +9,23 @@
     <string name="help">Help</string>
     <string name="settings">Preferences</string>
     <string name="new_rule">New Rule</string>
-	<string name="samsung">The Samsung Logo</string>
-	<string name="logo">The C&amp;E Logo</string>
-	<string name="main_menu">Main Menu</string>
+    <string name="samsung">The Samsung Logo</string>
+    <string name="logo">The C&amp;E Logo</string>
+    <string name="main_menu">Main Menu</string>
+
     <string-array name="help_items">
-        <item >Tutorial</item>
-        <item >Creating Rules</item>
-        <item >Viewing Rules</item>
-        <item >Editing Rules</item>
-        <item >Toggle Rules</item>
-        <item >Import Rules</item>
-        <item >Sharing Rules</item>
-        <item >Syncing Accounts</item>
-        <item >Advanced Rules</item>
-        <item >Rule Lists</item>
+        <item>Tutorial</item>
+        <item>Creating Rules</item>
+        <item>Viewing Rules</item>
+        <item>Editing Rules</item>
+        <item>Toggle Rules</item>
+        <item>Import Rules</item>
+        <item>Sharing Rules</item>
+        <item>Syncing Accounts</item>
+        <item>Advanced Rules</item>
+        <item>Rule Lists</item>
     </string-array>
+
     <string name="helpText">The Cause &amp; Effect Wordpress Page can be found here:</string>
     <string name="helpTextPass">Password is dmr</string>
     <string name="helpLink">http://ceandroid.wordpress.com/</string>
@@ -39,8 +42,8 @@
     <string name="title_activity_security">Security</string>
     <string name="title_activity_general">General</string>
     <string name="title_activity_sharelist">Share</string>
-	<string name="title_activity_sharenfc">Share via NFC</string>
-	<string name="share">Share</string>
+    <string name="title_activity_sharenfc">Share via NFC</string>
+    <string name="share">Share</string>
     <string name="az">A-Z View</string>
     <string name="category">Category View</string>
     <string name="list_view">List View</string>
@@ -48,46 +51,55 @@
     <string name="title_activity_edit_task2">Rule View</string>
     <string name="update_rule">Update Rule</string>
     <string name="active">Active</string>
+
     <string-array name="general_items">
-        <item >Setting 1</item>
-        <item >Setting 2</item>
-        <item >Setting 3</item>
-        <item >Setting 4</item>
-        <item >Setting 5</item>
-        <item >Setting 6</item>
-        <item >Setting 7</item>
-        <item >Setting 8</item>
-        <item >Setting 9</item>
-        <item >Setting 10</item>
+        <item>Setting 1</item>
+        <item>Setting 2</item>
+        <item>Setting 3</item>
+        <item>Setting 4</item>
+        <item>Setting 5</item>
+        <item>Setting 6</item>
+        <item>Setting 7</item>
+        <item>Setting 8</item>
+        <item>Setting 9</item>
+        <item>Setting 10</item>
     </string-array>
     <string-array name="secure_items">
-        <item >Security Item 1</item>
-        <item >Security Item 2</item>
-        <item >Security Item 3</item>
-        <item >Security Item 4</item>
-        <item >Security Item 5</item>
-        <item >Security Item 6</item>
-        <item >Security Item 7</item>
-        <item >Security Item 8</item>
-        <item >Security Item 9</item>
-        <item >Security Item 10</item>
+        <item>Security Item 1</item>
+        <item>Security Item 2</item>
+        <item>Security Item 3</item>
+        <item>Security Item 4</item>
+        <item>Security Item 5</item>
+        <item>Security Item 6</item>
+        <item>Security Item 7</item>
+        <item>Security Item 8</item>
+        <item>Security Item 9</item>
+        <item>Security Item 10</item>
     </string-array>
+
     <string name="about">About C&amp;E:</string>
     <string name="aboutDesc">For people wanting to make their smart devices truly intelligent. Today, smart phones are overly complex and jammed pack with functionality. Despite having the power to do so many spectacular things, smart devices lack the ability for users to take control and put the phone to work for them. Cause and Effect is a software solution that let users easily program their smart devices to respond to a set of rules with a chosen effect. With Cause and Effect, smart devices will become more intelligent and make user’s lives easier by intuitively automating tasks, gathering information, displaying information, etc. Unlike other rule based software, Cause and Effect will provide more functionality and a better user interface to allow any type of user to take control of their phone.</string>
-	<string name="aboutCredits">About C&amp;E:</string>
-	<string name="divider">Divider</string>
-	<string name="csni">Cause String Not Implemented</string>
-	<string name="ni">Not Implemented</string>
-	<string name="map">Choose a Location</string>
-	<string name="delete_confirmation_cause">Are you sure you want to delete this cause?</string>
-	<string name="delete_confirmation_effect">Are you sure you want to delete this effect?</string>
-	<string name="delete_confirmation_rule">Are you sure you want to delete this rule?</string>
-	<string name="delete_confirm">Delete</string>
-	<string name="cancel">Cancel</string>
-	<string name="delete">Delete</string>
-	<string-array name="ring_mode">
-        <item >Normal</item>
-        <item >Vibrate</item>
-        <item >Silent</item>
+    <string name="aboutCredits">About C&amp;E:</string>
+    <string name="divider">Divider</string>
+    <string name="csni">Cause String Not Implemented</string>
+    <string name="ni">Not Implemented</string>
+    <string name="map">Choose a Location</string>
+    <string name="delete_confirmation_cause">Are you sure you want to delete this cause?</string>
+    <string name="delete_confirmation_effect">Are you sure you want to delete this effect?</string>
+    <string name="delete_confirmation_rule">Are you sure you want to delete this rule?</string>
+    <string name="delete_confirm">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <string-array name="ring_mode">
+        <item>Normal</item>
+        <item>Vibrate</item>
+        <item>Silent</item>
     </string-array>
+
+    <string name="title_activity_edit_rule_pager">EditRulePager</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_cause_fragment">CauseFragment</string>
+
 </resources>

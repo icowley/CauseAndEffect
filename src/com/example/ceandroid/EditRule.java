@@ -4,16 +4,17 @@ import java.util.ArrayList;
 
 import CEapi.rCause;
 import CEapi.rEffect;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.app.DialogFragment;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -22,7 +23,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 /**
  * The EditRule class is the main Activity for rule creation This Activity is
@@ -33,7 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
  * 
  * @author CEandroid SMU
  */
-public class EditRule extends Activity implements
+public class EditRule extends FragmentActivity implements
 		DeleteDialogFragment.DeleteDialogListener {
 	/**
 	 * CEapp contains the globally accessible variables
@@ -237,7 +237,7 @@ public class EditRule extends Activity implements
 					app.editedNumber = app.currentRule.getRCauses()
 							.get(arg2 / 2).getID();
 					DialogFragment newFragment = new DeleteDialogFragment();
-					newFragment.show(getFragmentManager(), "delete");
+					newFragment.show(getSupportFragmentManager(), "delete");
 				}
 				return true;
 			}
@@ -298,7 +298,7 @@ public class EditRule extends Activity implements
 					app.editedNumber = app.currentRule.getREffects().get(arg2)
 							.getID();
 					DialogFragment newFragment = new DeleteDialogFragment();
-					newFragment.show(getFragmentManager(), "delete");
+					newFragment.show(getSupportFragmentManager(), "delete");
 				}
 				return true;
 			}
