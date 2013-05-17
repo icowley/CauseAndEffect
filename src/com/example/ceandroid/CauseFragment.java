@@ -18,8 +18,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class CauseFragment extends ListFragment implements
-		DeleteDialogFragment.DeleteDialogListener {
+public class CauseFragment extends ListFragment {
 
 	/**
 	 * CEapp contains the globally accessible variables
@@ -309,13 +308,10 @@ public class CauseFragment extends ListFragment implements
 			return 6;
 		return -1;
 	}
-
-	/**
-	 * This is called when a delete of a rCause or rEffect is confirmed
-	 * 
-	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogPositiveClick(android.app.DialogFragment)
-	 */
-	public void onDialogPositiveClick(DialogFragment dialog) {
+	
+	public void dialogDelete(FragmentActivity activity, DialogFragment dialog) {
+		mCallback = activity;
+		app = (CEapp) mCallback.getApplication();
 		DatabaseHandler db = new DatabaseHandler(mCallback);
 		if (app.editType) // cause
 		{
@@ -328,15 +324,6 @@ public class CauseFragment extends ListFragment implements
 		} 
 		app.currentRule.setRCauses(db.getAllRCauses(app.currentRule.getID()));
 		app.currentRule.updateTreeData(bools);
-		bools = app.currentRule.getBoolSequence();		
-	}
-
-	/**
-	 * This is called when the delete of a rCause or rEffect is cancelled
-	 * 
-	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogNegativeClick(android.app.DialogFragment)
-	 */
-	public void onDialogNegativeClick(DialogFragment dialog) {
-		// clicked cancel, do not do anything
+		bools = app.currentRule.getBoolSequence();
 	}
 }

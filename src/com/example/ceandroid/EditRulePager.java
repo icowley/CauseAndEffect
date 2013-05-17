@@ -122,6 +122,8 @@ public class EditRulePager extends FragmentActivity implements
 				onSwitchClicked(button);
 			}
 		});
+		
+		mViewPager.setCurrentItem(getIntent().getIntExtra("currentTab", 0));
 	}
 
 	/**
@@ -194,9 +196,12 @@ public class EditRulePager extends FragmentActivity implements
 	}
 
 	public void onDialogPositiveClick(DialogFragment dialog) {
-		// clicked to delete the cause or effect
+		((CauseFragment) mTabsAdapter.getItem(0)).dialogDelete(this, dialog);
+		((EffectFragment) mTabsAdapter.getItem(1)).dialogDelete(this, dialog);
 		finish();
-		startActivity(getIntent());
+		Intent intent = getIntent();
+		intent.putExtra("currentTab", mViewPager.getCurrentItem());
+		startActivity(intent);
 	}
 
 	public void onDialogNegativeClick(DialogFragment dialog) {

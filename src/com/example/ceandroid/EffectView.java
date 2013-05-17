@@ -183,7 +183,7 @@ public class EffectView extends FragmentActivity {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
 								EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 						startActivity(myIntent);
 					}
 				}
@@ -215,7 +215,7 @@ public class EffectView extends FragmentActivity {
 					app.currentRule.addREffect(re);
 					Intent myIntent = new Intent(getApplicationContext(),
 							EditRulePager.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 					startActivity(myIntent);
 				}
 			});
@@ -238,7 +238,7 @@ public class EffectView extends FragmentActivity {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
 								EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 						startActivity(myIntent);
 					}
 				}
@@ -267,7 +267,7 @@ public class EffectView extends FragmentActivity {
 					app.currentRule.addREffect(re);
 					Intent myIntent = new Intent(getApplicationContext(),
 							EditRulePager.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 					startActivity(myIntent);
 				}
 			});
@@ -284,7 +284,7 @@ public class EffectView extends FragmentActivity {
 			re.setParameters("Tone Length:" + parameter);
 			app.currentRule.addREffect(re);
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 			startActivity(myIntent);
 		}
 			break;
@@ -306,7 +306,7 @@ public class EffectView extends FragmentActivity {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
 								EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 						startActivity(myIntent);
 					}
 				}
@@ -372,7 +372,7 @@ public class EffectView extends FragmentActivity {
 			app.addedRCause = true;
 
 			Intent myIntent = new Intent(getApplicationContext(),
-					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 			startActivity(myIntent);
 		}
 
@@ -387,7 +387,7 @@ public class EffectView extends FragmentActivity {
 			if (app.edit) {
 				Intent myIntent = new Intent(getApplicationContext(),
 						EditRulePager.class)
-						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 				startActivity(myIntent);
 			}
 		}
@@ -434,20 +434,20 @@ public class EffectView extends FragmentActivity {
 				app.currentRule.addREffect(re);
 				Intent myIntent = new Intent(this.getApplicationContext(),
 						EditRulePager.class)
-						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 				startActivity(myIntent);
 			} else {
 				if (app.edit) {
 					Intent myIntent = new Intent(this.getApplicationContext(),
 							EditRulePager.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 					startActivity(myIntent);
 				}
 			}
 		}
 		if (app.edit) {
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 			startActivity(myIntent);
 		}
 	}
@@ -515,7 +515,7 @@ public class EffectView extends FragmentActivity {
 								app.currentRule.addREffect(re);
 								Intent myIntent = new Intent(
 										getApplicationContext(), EditRulePager.class)
-										.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+										.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 								startActivity(myIntent);
 							}
 						})
@@ -533,7 +533,7 @@ public class EffectView extends FragmentActivity {
 									Intent myIntent = new Intent(
 											getApplicationContext(),
 											EditRulePager.class)
-											.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+											.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 1);
 									startActivity(myIntent);
 								}
 							}
@@ -566,7 +566,7 @@ public class EffectView extends FragmentActivity {
 			// in the Action Bar.
 			Intent parentActivityIntent = new Intent(this, EditRulePager.class);
 			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-					| Intent.FLAG_ACTIVITY_NEW_TASK);
+					| Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("currentTab", 1);
 			startActivity(parentActivityIntent);
 			finish();
 			return true;

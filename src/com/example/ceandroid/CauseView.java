@@ -157,14 +157,14 @@ public class CauseView extends FragmentActivity {
 		case phoneCall: {
 			Intent intent = new Intent(Intent.ACTION_PICK,
 					ContactsContract.Contacts.CONTENT_URI)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 			startActivityForResult(intent, 1);
 		}
 			break;
 		case textMessage: {
 			Intent intent = new Intent(Intent.ACTION_PICK,
 					ContactsContract.Contacts.CONTENT_URI)
-					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 			startActivityForResult(intent, 2);
 		}
 			break;
@@ -187,7 +187,7 @@ public class CauseView extends FragmentActivity {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
 								EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					}
 				}
@@ -218,7 +218,7 @@ public class CauseView extends FragmentActivity {
 					app.addedRCause = true;
 					Intent myIntent = new Intent(getApplicationContext(),
 							EditRulePager.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 					startActivity(myIntent);
 				}
 			});
@@ -244,7 +244,7 @@ public class CauseView extends FragmentActivity {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
 								EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					}
 				}
@@ -263,7 +263,7 @@ public class CauseView extends FragmentActivity {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
 								EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					}
 				}
@@ -298,7 +298,7 @@ public class CauseView extends FragmentActivity {
 					app.addedRCause = true;
 					Intent myIntent = new Intent(getApplicationContext(),
 							EditRulePager.class)
-							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 					startActivity(myIntent);
 				}
 			});
@@ -307,7 +307,7 @@ public class CauseView extends FragmentActivity {
 			break;
 		case location: {
 			Intent intent = new Intent(this.getApplicationContext(),
-					MapPicker.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					MapPicker.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 			app.setTemp(position);
 			startActivityForResult(intent, 2);
 		}
@@ -373,7 +373,7 @@ public class CauseView extends FragmentActivity {
 			app.addedRCause = true;
 
 			Intent myIntent = new Intent(getApplicationContext(),
-					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 			startActivity(myIntent);
 		}
 
@@ -387,7 +387,7 @@ public class CauseView extends FragmentActivity {
 			if (app.edit) {
 				Intent myIntent = new Intent(getApplicationContext(),
 						EditRulePager.class)
-						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 				startActivity(myIntent);
 			}
 		}
@@ -432,7 +432,7 @@ public class CauseView extends FragmentActivity {
 
 						Intent myIntent = new Intent(
 								this.getApplicationContext(), EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					} else {
 						Toast.makeText(this.getApplicationContext(),
@@ -440,14 +440,14 @@ public class CauseView extends FragmentActivity {
 								Toast.LENGTH_LONG).show();
 						Intent intent = new Intent(Intent.ACTION_PICK,
 								ContactsContract.Contacts.CONTENT_URI)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivityForResult(intent, 1);
 					}
 				} else {
 					if (app.edit) {
 						Intent myIntent = new Intent(
 								this.getApplicationContext(), EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					}
 				}
@@ -479,7 +479,7 @@ public class CauseView extends FragmentActivity {
 
 						Intent myIntent = new Intent(
 								this.getApplicationContext(), EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					} else {
 						Toast.makeText(this.getApplicationContext(),
@@ -487,14 +487,14 @@ public class CauseView extends FragmentActivity {
 								Toast.LENGTH_LONG).show();
 						Intent intent = new Intent(Intent.ACTION_PICK,
 								ContactsContract.Contacts.CONTENT_URI)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivityForResult(intent, 1);
 					}
 				} else {
 					if (app.edit) {
 						Intent myIntent = new Intent(
 								this.getApplicationContext(), EditRulePager.class)
-								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 						startActivity(myIntent);
 					}
 				}
@@ -502,12 +502,12 @@ public class CauseView extends FragmentActivity {
 			break;
 		default:
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 			startActivity(myIntent);
 		}
 		if (app.edit) {
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("currentTab", 0);
 			startActivity(myIntent);
 		}
 	}

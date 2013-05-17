@@ -13,14 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 
-public class EffectFragment extends ListFragment implements
-		DeleteDialogFragment.DeleteDialogListener {
+public class EffectFragment extends ListFragment {
 
 	/**
 	 * CEapp contains the globally accessible variables
@@ -142,15 +141,17 @@ public class EffectFragment extends ListFragment implements
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
 					int arg2, long arg3) {
 				int size = arg0.getAdapter().getCount();
-				if (size == (arg2 + 1)) {
-					// do nothing, '+' was selected
-				} else {
-					app.editType = false;
-					app.editedNumber = app.currentRule.getREffects().get(arg2)
-							.getID();
-					DialogFragment newFragment = new DeleteDialogFragment();
-					newFragment.show(mCallback.getSupportFragmentManager(),
-							"delete");
+				if (arg2 < app.currentRule.getREffects().size()) {
+					if (size == (arg2 + 1)) {
+						// do nothing, '+' was selected
+					} else {
+						app.editType = false;
+						app.editedNumber = app.currentRule.getREffects()
+								.get(arg2).getID();
+						DialogFragment newFragment = new DeleteDialogFragment();
+						newFragment.show(mCallback.getSupportFragmentManager(),
+								"delete");
+					}
 				}
 				return true;
 			}
@@ -196,13 +197,9 @@ public class EffectFragment extends ListFragment implements
 		return -1;
 	}
 
-	/**
-	 * This is called when a delete of a rCause or rEffect is confirmed
-	 * 
-	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogPositiveClick(android.app.DialogFragment)
-	 */
-	public void onDialogPositiveClick(DialogFragment dialog) {
-		// clicked to delete the cause or effect
+	public void dialogDelete(FragmentActivity activity, DialogFragment dialog) {
+		mCallback = activity;
+		app = (CEapp) mCallback.getApplication();
 		DatabaseHandler db = new DatabaseHandler(mCallback);
 		if (!app.editType) // effect
 		{
@@ -210,14 +207,5 @@ public class EffectFragment extends ListFragment implements
 		}
 		app.currentRule.setREffects(db.getAllREffects(app.currentRule.getID()));
 		db.close();
-	}
-
-	/**
-	 * This is called when the delete of a rCause or rEffect is cancelled
-	 * 
-	 * @see com.example.ceandroid.DeleteDialogFragment.DeleteDialogListener#onDialogNegativeClick(android.app.DialogFragment)
-	 */
-	public void onDialogNegativeClick(DialogFragment dialog) {
-		// Do nothing, cancel was clicked.
 	}
 }
