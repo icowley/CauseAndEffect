@@ -201,10 +201,7 @@ public class EffectFragment extends ListFragment {
 		mCallback = activity;
 		app = (CEapp) mCallback.getApplication();
 		DatabaseHandler db = new DatabaseHandler(mCallback);
-		if (!app.editType) // effect
-		{
-			db.deleteREffect(db.getREffectByID(app.editedNumber));
-		}
+		db.deleteREffect(db.getREffectByID(app.editedNumber));
 		app.currentRule.setREffects(db.getAllREffects(app.currentRule.getID()));
 		db.close();
 	}

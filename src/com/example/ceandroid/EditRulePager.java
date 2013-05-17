@@ -196,8 +196,11 @@ public class EditRulePager extends FragmentActivity implements
 	}
 
 	public void onDialogPositiveClick(DialogFragment dialog) {
-		((CauseFragment) mTabsAdapter.getItem(0)).dialogDelete(this, dialog);
-		((EffectFragment) mTabsAdapter.getItem(1)).dialogDelete(this, dialog);
+		if(app.editType) {
+			((CauseFragment) mTabsAdapter.getItem(0)).dialogDelete(this, dialog);
+		} else {
+			((EffectFragment) mTabsAdapter.getItem(1)).dialogDelete(this, dialog);
+		}
 		finish();
 		Intent intent = getIntent();
 		intent.putExtra("currentTab", mViewPager.getCurrentItem());

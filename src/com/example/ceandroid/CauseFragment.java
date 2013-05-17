@@ -313,15 +313,12 @@ public class CauseFragment extends ListFragment {
 		mCallback = activity;
 		app = (CEapp) mCallback.getApplication();
 		DatabaseHandler db = new DatabaseHandler(mCallback);
-		if (app.editType) // cause
-		{
-			db.deleteRCause(db.getRCauseByID(app.editedNumber));
-			if (!bools.isEmpty() && bools.size() == delPos) {
-				bools.remove(bools.size() - 1);
-			} else if (!bools.isEmpty()) {
-				bools.remove(delPos);
-			}
-		} 
+		db.deleteRCause(db.getRCauseByID(app.editedNumber));
+		if (!bools.isEmpty() && bools.size() == delPos) {
+			bools.remove(bools.size() - 1);
+		} else if (!bools.isEmpty()) {
+			bools.remove(delPos);
+		}		 
 		app.currentRule.setRCauses(db.getAllRCauses(app.currentRule.getID()));
 		app.currentRule.updateTreeData(bools);
 		bools = app.currentRule.getBoolSequence();
