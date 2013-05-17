@@ -186,7 +186,7 @@ public class CauseView extends FragmentActivity {
 				public void onDismiss(DialogInterface arg0) {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
-								EditRule.class)
+								EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -217,7 +217,7 @@ public class CauseView extends FragmentActivity {
 					app.currentRule.addRCause(rc);
 					app.addedRCause = true;
 					Intent myIntent = new Intent(getApplicationContext(),
-							EditRule.class)
+							EditRulePager.class)
 							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(myIntent);
 				}
@@ -243,7 +243,7 @@ public class CauseView extends FragmentActivity {
 				public void onDismiss(DialogInterface arg0) {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
-								EditRule.class)
+								EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -262,7 +262,7 @@ public class CauseView extends FragmentActivity {
 				public void onDismiss(DialogInterface arg0) {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
-								EditRule.class)
+								EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -297,7 +297,7 @@ public class CauseView extends FragmentActivity {
 					app.currentRule.addRCause(rc);
 					app.addedRCause = true;
 					Intent myIntent = new Intent(getApplicationContext(),
-							EditRule.class)
+							EditRulePager.class)
 							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(myIntent);
 				}
@@ -373,7 +373,7 @@ public class CauseView extends FragmentActivity {
 			app.addedRCause = true;
 
 			Intent myIntent = new Intent(getApplicationContext(),
-					EditRule.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 		}
 
@@ -386,7 +386,7 @@ public class CauseView extends FragmentActivity {
 		public void onDismiss(DialogInterface dialog) {
 			if (app.edit) {
 				Intent myIntent = new Intent(getApplicationContext(),
-						EditRule.class)
+						EditRulePager.class)
 						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(myIntent);
 			}
@@ -431,7 +431,7 @@ public class CauseView extends FragmentActivity {
 						app.addedRCause = true;
 
 						Intent myIntent = new Intent(
-								this.getApplicationContext(), EditRule.class)
+								this.getApplicationContext(), EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					} else {
@@ -446,7 +446,7 @@ public class CauseView extends FragmentActivity {
 				} else {
 					if (app.edit) {
 						Intent myIntent = new Intent(
-								this.getApplicationContext(), EditRule.class)
+								this.getApplicationContext(), EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -478,7 +478,7 @@ public class CauseView extends FragmentActivity {
 						app.addedRCause = true;
 
 						Intent myIntent = new Intent(
-								this.getApplicationContext(), EditRule.class)
+								this.getApplicationContext(), EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					} else {
@@ -493,7 +493,7 @@ public class CauseView extends FragmentActivity {
 				} else {
 					if (app.edit) {
 						Intent myIntent = new Intent(
-								this.getApplicationContext(), EditRule.class)
+								this.getApplicationContext(), EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -502,12 +502,12 @@ public class CauseView extends FragmentActivity {
 			break;
 		default:
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRule.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 		}
 		if (app.edit) {
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRule.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 		}
 	}
@@ -535,7 +535,7 @@ public class CauseView extends FragmentActivity {
 		case android.R.id.home: {
 			// This is called when the Home (Up) button is pressed
 			// in the Action Bar.
-			Intent parentActivityIntent = new Intent(this, EditRule.class);
+			Intent parentActivityIntent = new Intent(this, EditRulePager.class);
 			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(parentActivityIntent);

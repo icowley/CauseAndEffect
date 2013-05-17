@@ -182,7 +182,7 @@ public class EffectView extends FragmentActivity {
 				public void onDismiss(DialogInterface arg0) {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
-								EditRule.class)
+								EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -214,7 +214,7 @@ public class EffectView extends FragmentActivity {
 					re.setParameters(parameter);
 					app.currentRule.addREffect(re);
 					Intent myIntent = new Intent(getApplicationContext(),
-							EditRule.class)
+							EditRulePager.class)
 							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(myIntent);
 				}
@@ -237,7 +237,7 @@ public class EffectView extends FragmentActivity {
 				public void onDismiss(DialogInterface arg0) {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
-								EditRule.class)
+								EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -266,7 +266,7 @@ public class EffectView extends FragmentActivity {
 					re.setParameters(parameter);
 					app.currentRule.addREffect(re);
 					Intent myIntent = new Intent(getApplicationContext(),
-							EditRule.class)
+							EditRulePager.class)
 							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(myIntent);
 				}
@@ -284,7 +284,7 @@ public class EffectView extends FragmentActivity {
 			re.setParameters("Tone Length:" + parameter);
 			app.currentRule.addREffect(re);
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRule.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 		}
 			break;
@@ -305,7 +305,7 @@ public class EffectView extends FragmentActivity {
 				public void onDismiss(DialogInterface arg0) {
 					if (app.edit) {
 						Intent myIntent = new Intent(getApplicationContext(),
-								EditRule.class)
+								EditRulePager.class)
 								.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						startActivity(myIntent);
 					}
@@ -372,7 +372,7 @@ public class EffectView extends FragmentActivity {
 			app.addedRCause = true;
 
 			Intent myIntent = new Intent(getApplicationContext(),
-					EditRule.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 		}
 
@@ -386,7 +386,7 @@ public class EffectView extends FragmentActivity {
 		public void onDismiss(DialogInterface dialog) {
 			if (app.edit) {
 				Intent myIntent = new Intent(getApplicationContext(),
-						EditRule.class)
+						EditRulePager.class)
 						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(myIntent);
 			}
@@ -433,13 +433,13 @@ public class EffectView extends FragmentActivity {
 				re.setParameters(parameter);
 				app.currentRule.addREffect(re);
 				Intent myIntent = new Intent(this.getApplicationContext(),
-						EditRule.class)
+						EditRulePager.class)
 						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(myIntent);
 			} else {
 				if (app.edit) {
 					Intent myIntent = new Intent(this.getApplicationContext(),
-							EditRule.class)
+							EditRulePager.class)
 							.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					startActivity(myIntent);
 				}
@@ -447,7 +447,7 @@ public class EffectView extends FragmentActivity {
 		}
 		if (app.edit) {
 			Intent myIntent = new Intent(this.getApplicationContext(),
-					EditRule.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					EditRulePager.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(myIntent);
 		}
 	}
@@ -514,7 +514,7 @@ public class EffectView extends FragmentActivity {
 								re.setParameters("Ring mode: " + parameter);
 								app.currentRule.addREffect(re);
 								Intent myIntent = new Intent(
-										getApplicationContext(), EditRule.class)
+										getApplicationContext(), EditRulePager.class)
 										.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 								startActivity(myIntent);
 							}
@@ -532,7 +532,7 @@ public class EffectView extends FragmentActivity {
 								if (app.edit) {
 									Intent myIntent = new Intent(
 											getApplicationContext(),
-											EditRule.class)
+											EditRulePager.class)
 											.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 									startActivity(myIntent);
 								}
@@ -564,7 +564,7 @@ public class EffectView extends FragmentActivity {
 		case android.R.id.home: {
 			// This is called when the Home (Up) button is pressed
 			// in the Action Bar.
-			Intent parentActivityIntent = new Intent(this, EditRule.class);
+			Intent parentActivityIntent = new Intent(this, EditRulePager.class);
 			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
 					| Intent.FLAG_ACTIVITY_NEW_TASK);
 			startActivity(parentActivityIntent);
