@@ -17,17 +17,17 @@ import android.widget.Toast;
 
 import com.example.ceandroid.CEapp;
 import com.example.ceandroid.CauseView;
-import com.example.ceandroid.EditRule;
+import com.example.ceandroid.EditRulePager;
 import com.example.ceandroid.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.SupportMapFragment;
 
 /**
  * The MapPicker allows the user to choose a Location for all Location based
@@ -239,7 +239,7 @@ public class MapPicker extends android.support.v4.app.FragmentActivity {
 		app.currentRule.addRCause(rc);
 		app.addedRCause = true;
 
-		Intent myIntent = new Intent(MapPicker.this, EditRule.class)
+		Intent myIntent = new Intent(MapPicker.this, EditRulePager.class)
 				.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(myIntent);
 	}
@@ -305,7 +305,7 @@ public class MapPicker extends android.support.v4.app.FragmentActivity {
 			CEapp app = (CEapp) getApplication();
 			if (app.edit) {
 				Intent myIntent = new Intent(getApplicationContext(),
-						EditRule.class)
+						EditRulePager.class)
 						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(myIntent);
 			} else {
@@ -332,7 +332,7 @@ public class MapPicker extends android.support.v4.app.FragmentActivity {
 			CEapp app = (CEapp) getApplication();
 			if (app.edit) {
 				Intent myIntent = new Intent(getApplicationContext(),
-						EditRule.class)
+						EditRulePager.class)
 						.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(myIntent);
 			}
