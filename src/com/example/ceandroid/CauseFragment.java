@@ -299,13 +299,13 @@ public class CauseFragment extends ListFragment {
 		if (type.equals("phoneCall"))
 			return 2;
 		if (type.equals("textMessage"))
-			return 3;
-		if (type.equals("time"))
-			return 4;
-		if (type.equals("ssid"))
 			return 5;
-		if (type.equals("wifiStatus"))
+		if (type.equals("time"))
 			return 6;
+		if (type.equals("ssid"))
+			return 3;
+		if (type.equals("wifiStatus"))
+			return 4;
 		return -1;
 	}
 	

@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,7 +101,6 @@ public class EditRulePager extends FragmentActivity implements
 		// Fill Out Form
 		EditText title = (EditText) findViewById(R.id.rule_name);
 		String s = app.currentRule.getName();
-		Log.d("IC", s);
 		if (s != null) {
 			title.setText(app.currentRule.getName());
 		}

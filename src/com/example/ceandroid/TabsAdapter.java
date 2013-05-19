@@ -10,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 /**
      * This is a helper class that implements the management of tabs and all
@@ -66,15 +65,6 @@ import android.util.Log;
         @Override
         public Fragment getItem(int position) {
             TabInfo info = mTabs.get(position);
-            if(mContext == null) {
-            	Log.d("IC", "context");
-            }
-            if(info.clss.getName() == null) {
-            	Log.d("IC", "clss.getName()");
-            }
-            if(info.args == null) {
-            	Log.d("IC", "args");
-            }
             return Fragment.instantiate(mContext, info.clss.getName(), info.args);
         }
 
